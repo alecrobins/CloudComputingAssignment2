@@ -1,0 +1,25 @@
+Notes:
+1. Only file you need to modify is networking_application.py
+2. In networking_application.py, look at the last function (main) first. 
+3. You will need to implement addHosts, addSwitches, addLinks, and networking_application functions in this file which get called in main.
+4. Don't remove log messages (info(..)). Write relevant code immediately after the log message.
+5. For the very first time "vagrant up" should take 10-12 minutes since it will need to download and install (1) ubuntu  and (2) mininet
+   However from next time it should run in less that a minute, unless you destroyed VM using "vagrant destroy".
+6. When you execute "vagrant up" for the first time in the folder, there will be lot of warnings/errors (in red). Ignore them.
+7. If in doubt, you can verify if "vagrant up" did everything it is supposed to do by logging into the guest VM and issuing following commands
+   1. which mn: It should show location of mininet executable
+   2. mn --version: It should show mn version (mininet version)
+8. Once VM is up after first "vagrant up"; later you can use "vagrant provision" to just run networking_application.sh.
+
+Flow of Operations:
+1. On vagrant up, Vagrantfile creates a VM of 1024MB RAM, 2 processor cores, Ubuntu 14.04 OS. and then calls bootstrap.sh
+2. Bootstrap.sh installs mininet in the VM and calls networking_application.sh
+3. Networking_application.sh should create three hosts(h1, h2, h3) and two switches(s1, s2) as per following topology
+   s1-----s2
+   /\      |
+  h1 h2    h3
+4. Then h3 should ping to  h1 and h2. 
+5. Normal case: when all links are working.
+6. Fault 1: when h1-s1 link is down
+7. Fault 2: when s1-s2 link is down
+
