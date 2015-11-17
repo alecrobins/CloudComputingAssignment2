@@ -85,11 +85,6 @@ def networking_application():
     h2 = net.get('h2')  
     h3=  net.get('h3')  
 
-    "1. Run following command on h3"
-    "2  command =  /bin/bash -c 'while true; do ping -D -c 4 10.0.0.1 &>> /vagrant/h3-h1-ping.log; ping -D -c 4 10.0.0.2 &>> /vagrant/h3-h2-ping.log; sleep 1; done' " 
-    "3. It basically makes h3 ping to (sends 4 packets to ) h1 and h2 after every 1 second sleep and save output to h3-h1-ping.log and h3-h2-ping.log files respectively"
-    "4. You need to something like pingh3 = h3.sendCmd(<command>)"
-
     info( '\nrunning a command on h3\n' )
     command =  "/bin/bash -c 'while true; do ping -D -c 4 10.0.0.1 &>> /vagrant/h3-h1-ping.log; ping -D -c 4 10.0.0.2 &>> /vagrant/h3-h2-ping.log; sleep 1; done'"
     h3.sendCmd(command)
@@ -102,13 +97,15 @@ def networking_application():
 
     "fault 1: bring down link between h1 and s1"
     info( '\n(Fault 1): Bringing down link between h1 and s1\n' )
-    "write your code here. use net.configLinkStatus command"
+    net.configLinkStatus('h1','s1','down')
 
     time.sleep(50)
 
 
     "fault 2: bring down link between s1 and s2 . (first, bring up link between h1 and s1 that you just brought down)"
     info( '\n(Fault 2): Bringing down link between s1 and s2\n' )
+    net.configLinkStatus('h1','s1','up')
+    net.configLinkStatus('s1','s2','down')
     "write your code here. use net.configLinkStatus command"
 
 
