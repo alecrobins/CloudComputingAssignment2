@@ -35,13 +35,13 @@ def addHosts():
 
     # Add three hosts h1, h2, h3 to the network
     info( '\nadding host h1' )
-    h1 = self.addHost('h1');
+    h1 = net.addHost('h1');
 
     info( '\nadding host h2' )
-    h2 = self.addHost('h2')
+    h2 = net.addHost('h2')
 
     info( '\nadding host h3' )
-    h3 = self.addHost('h3')
+    h3 = net.addHost('h3')
 
 
 
@@ -50,10 +50,10 @@ def addSwitches():
 
     # Add two switches s1 and s2
     info( '\nadding switch s1:' )
-    s1 = self.addSwitch('s1');
+    s1 = net.addSwitch('s1');
 
     info( '\nadding switch s2:' )
-    s2 = self.addSwitch('s2');
+    s2 = net.addSwitch('s2');
 
 
 
@@ -67,16 +67,16 @@ def setLinks():
     "7. e.g. net.addLink(h1, s1)"
 
     info( '\nsetting a link between switch s1 and host h1\n' )
-    self.addLink(h1, s1)
+    net.addLink(h1, s1)
 
     info( '\nsetting a link between switch s1 and host h2\n' )
-    self.addLink(h2, s1)
+    net.addLink(h2, s1)
 
     info( '\nsetting a link between switch s2 and host h3\n' )
-    self.addLink(h3, s2)
+    net.addLink(h3, s2)
 
     info( '\nsetting a link between switch s1 and switch s2\n' )
-    self.addLink(s1, s2)
+    net.addLink(s1, s2)
 
 
 def networking_application():
@@ -85,14 +85,13 @@ def networking_application():
     h2 = net.get('h2')  
     h3=  net.get('h3')  
 
-
     "1. Run following command on h3"
     "2  command =  /bin/bash -c 'while true; do ping -D -c 4 10.0.0.1 &>> /vagrant/h3-h1-ping.log; ping -D -c 4 10.0.0.2 &>> /vagrant/h3-h2-ping.log; sleep 1; done' " 
     "3. It basically makes h3 ping to (sends 4 packets to ) h1 and h2 after every 1 second sleep and save output to h3-h1-ping.log and h3-h2-ping.log files respectively"
     "4. You need to something like pingh3 = h3.sendCmd(<command>)"
 
     info( '\nrunning a command on h3\n' )
-    command =  /bin/bash -c 'while true; do ping -D -c 4 10.0.0.1 &>> /vagrant/h3-h1-ping.log; ping -D -c 4 10.0.0.2 &>> /vagrant/h3-h2-ping.log; sleep 1; done'
+    command =  "/bin/bash -c 'while true; do ping -D -c 4 10.0.0.1 &>> /vagrant/h3-h1-ping.log; ping -D -c 4 10.0.0.2 &>> /vagrant/h3-h2-ping.log; sleep 1; done'"
     h3.sendCmd(command)
 
     "normal case: when all links are working"
