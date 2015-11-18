@@ -35,13 +35,13 @@ def addHosts():
 
     # Add three hosts h1, h2, h3 to the network
     info( '\nadding host h1' )
-    h1 = net.addHost('h1');
+    h1 = net.addHost('h1', ip='10.0.0.1');
 
-    info( '\nadding host h2' )
-    h2 = net.addHost('h2')
+    info( '\nadding host h2')
+    h2 = net.addHost('h2', ip='10.0.0.2')
 
     info( '\nadding host h3' )
-    h3 = net.addHost('h3')
+    h3 = net.addHost('h3', ip='10.0.0.3' )
 
 
 
@@ -58,13 +58,6 @@ def addSwitches():
 
 
 def setLinks():
-    "1. set links between host and switches as follows"
-    "2. s1 is connected to  h1, h2"
-    "3. s2 is connected to  h3"
-    "4. s1 and s2 are connected to each other"
-    "5. You need to do something like this: net.addLink(<parameters>)"
-    "6. (optional) Set some reasonable properties on all links e.g. b/w, dealy, packet loss"
-    "7. e.g. net.addLink(h1, s1)"
 
     info( '\nsetting a link between switch s1 and host h1\n' )
     net.addLink(h1, s1)
